@@ -22,11 +22,9 @@ enum planck_layers {
   _QWERTY,
   _LOWER,
   _RAISE,
-  _MOUSE,
+  _MSCTRL,
   _MACRO,
-  _COLEMAK,
-  _PLOVER,
-  _ADJUST
+  _DVORAK,
 };
 enum planck_keycodes {
   QWERTY = SAFE_RANGE,
@@ -58,29 +56,29 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT ,
     KC_LCTL, KC_LCTL, KC_LGUI, KC_LALT, MO(_LOWER),   KC_SPC,  KC_SPC,  MO(_RAISE),   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
 ),
-  
-/* Colemak
+ 
+/* Dvorak
  * ,-----------------------------------------------------------------------------------.
- * | Tab  |   Q  |   W  |   F  |   P  |   G  |   J  |   L  |   U  |   Y  |   ;  | Bksp |
+ * | Tab  |   "  |   ,  |   .  |   P  |   Y  |   F  |   G  |   C  |   R  |   L  | Bksp |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Esc  |   A  |   R  |   S  |   T  |   D  |   H  |   N  |   E  |   I  |   O  |  "   |
+ * | Esc  |   A  |   O  |   E  |   U  |   I  |   D  |   H  |   T  |   N  |   S  |  /   |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Shift|   Z  |   X  |   C  |   V  |   B  |   K  |   M  |   ,  |   .  |   /  |Enter |
+ * | Shift|   ;  |   Q  |   J  |   K  |   X  |   B  |   M  |   W  |   V  |   Z  |Enter |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * | Brite| Ctrl | Alt  | GUI  |Lower |    Space    |Raise | Left | Down |  Up  |Right |
  * `-----------------------------------------------------------------------------------'
  */
-[_COLEMAK] = LAYOUT_planck_grid(
-    KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,    KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_BSPC,
-    KC_ESC,  KC_A,    KC_R,    KC_S,    KC_T,    KC_D,    KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,
-    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT ,
-    BACKLIT, KC_LCTL, KC_LALT, KC_LGUI, LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
+[_DVORAK] = LAYOUT_planck_grid(
+    KC_TAB,  KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L,    KC_BSPC,
+    KC_ESC,  KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S,    KC_SLSH,
+    KC_LSFT, KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,    KC_ENT ,
+    DF(_QWERTY), DF(_QWERTY), KC_LALT, KC_LGUI, MO(_LOWER),   KC_SPC,  KC_SPC,  MO(_RAISE),   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
 ),
-
 
 /* Lower
  * ,-----------------------------------------------------------------------------------.
- * |   ~  |   !  |   @  |   #  |   $  |   %  |   ^  |   &  |   *  |   (  |   )  | Bksp |
+ * |   ~  |   !  |   @  |   #  | 
+ *   $  |   %  |   ^  |   &  |   *  |   (  |   )  | Bksp |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * | Del  |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |   _  |   +  |   {  |   }  |  |   |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -93,7 +91,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR,    KC_ASTR,    KC_LPRN, KC_RPRN, KC_BSPC,
     KC_DEL,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_UNDS,    KC_PLUS,    KC_LCBR, KC_RCBR, KC_PIPE,
     _______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  S(KC_NUHS), S(KC_NUBS), KC_HOME, KC_END,  _______,
-    _______, _______, _______, _______, _______, _______, MO(_MOUSE), KC_TRNS,    KC_MNXT,    KC_VOLD, KC_VOLU, KC_MPLY
+    _______, _______, _______, _______, _______, _______, MO(_MSCTRL), MO(_MSCTRL),    KC_MNXT,    KC_VOLD, KC_VOLU, KC_MPLY
 ),
 
 /* Raise
@@ -110,37 +108,31 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_RAISE] = LAYOUT_planck_grid(
     KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,
     KC_DEL,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_MINS, KC_EQL,  KC_LBRC, KC_RBRC, KC_BSLS,
-    _______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_NUHS, KC_NUBS, KC_PGUP, KC_PGDN, _______,
-    _______, _______, _______, _______, MO(_MACRO), _______, _______, _______, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY
+    KC_NO, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_NUHS, KC_NUBS, KC_PGUP, KC_PGDN, KC_NO,
+    KC_NO, KC_NO, KC_NO, KC_NO, MO(_MACRO), KC_NO, KC_NO, KC_NO, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY
 ),
 [_MACRO] = LAYOUT_planck_grid(
     KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
-    KC_ESC,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
+    KC_ESC,  KC_MS_L,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
     KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT ,
     BACKLIT, KC_LCTL, KC_LALT, KC_LGUI, KC_TRNS,   KC_SPC,  KC_SPC,  KC_TRNS,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
 ),
-[_MOUSE] = LAYOUT_planck_grid(
-    KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
-    KC_ESC,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
-    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT ,
-    BACKLIT, KC_LCTL, KC_LALT, KC_LGUI, KC_TRNS,   KC_SPC,  KC_SPC,  KC_TRNS,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
-),
-/* Plover layer (http://opensteno.org)
+/* Mouse layer 
  * ,-----------------------------------------------------------------------------------.
- * |   #  |   #  |   #  |   #  |   #  |   #  |   #  |   #  |   #  |   #  |   #  |   #  |
+ * |      |      | C_UP |      |      |      |      |      |      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |   S  |   T  |   P  |   H  |   *  |   *  |   F  |   P  |   L  |   T  |   D  |
+ * |      |C_left|C_DOWN|C_RGHT|      |      |M_LEFT|SCRL_D|SCRL_D|M_RGHT|      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |   S  |   K  |   W  |   R  |   *  |   *  |   R  |   B  |   G  |   S  |   Z  |
+ * |      |      |      |      |      |      |      |      |      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Exit |      |      |   A  |   O  |             |   E  |   U  |      |      |      |
+ * |      |      |      |      |      |             |      |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
-[_PLOVER] = LAYOUT_planck_grid(
-    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1   ,
-    XXXXXXX, KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC,
-    XXXXXXX, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
-    EXT_PLV, XXXXXXX, XXXXXXX, KC_C,    KC_V,    XXXXXXX, XXXXXXX, KC_N,    KC_M,    XXXXXXX, XXXXXXX, XXXXXXX
+[_MSCTRL] = LAYOUT_planck_grid(
+    KC_NO,KC_NO,KC_MS_U,KC_NO,KC_NO,KC_NO,KC_NO,KC_NO,KC_NO,KC_NO,DF(_DVORAK),KC_NO, 
+    KC_NO,KC_MS_L,KC_MS_D,KC_MS_R,KC_A,KC_NO,KC_BTN1,KC_WH_D,KC_WH_U,KC_BTN2,KC_NO,KC_NO, 
+    KC_NO,KC_NO,KC_NO,KC_NO,KC_NO,KC_NO,KC_NO,KC_NO,KC_NO,KC_NO,KC_NO,KC_NO, 
+    KC_NO,KC_NO,KC_NO,KC_NO,KC_NO,KC_NO,KC_NO,KC_NO,KC_NO,KC_NO,KC_NO,KC_NO
 ),
 
 /* Adjust (Lower + Raise)
@@ -162,10 +154,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   float plover_gb_song[][2]  = SONG(PLOVER_GOODBYE_SOUND);
 #endif
 
-layer_state_t layer_state_set_user(layer_state_t state) {
-  return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
-}
+// layer_state_t layer_state_set_user(layer_state_t state) {
 
+//   return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
+// }
 
 extern bool g_suspend_state;
 extern rgb_config_t rgb_matrix_config;
@@ -176,20 +168,10 @@ void keyboard_post_init_user(void) {
 
 const uint8_t PROGMEM ledmap[][DRIVER_LED_TOTAL][3] = {
     [0] = { {144,229,231}, {144,229,231}, {144,229,231}, {144,229,231}, {144,229,231}, {144,229,231}, {144,229,231}, {144,229,231}, {144,229,231}, {144,229,231}, {144,229,231}, {144,229,231}, {144,229,231}, {144,229,231}, {144,229,231}, {144,229,231}, {144,229,231}, {144,229,231}, {144,229,231}, {144,229,231}, {144,229,231}, {144,229,231}, {144,229,231}, {144,229,231}, {144,229,231}, {144,229,231}, {144,229,231}, {144,229,231}, {144,229,231}, {144,229,231}, {144,229,231}, {144,229,231}, {144,229,231}, {144,229,231}, {144,229,231}, {144,229,231}, {144,229,231}, {144,229,231}, {144,229,231}, {144,229,231}, {144,229,231}, {144,229,231}, {144,229,231}, {144,229,231}, {144,229,231}, {144,229,231}, {144,229,231} },
-
     [1] = { {141,255,233}, {141,255,233}, {141,255,233}, {141,255,233}, {141,255,233}, {141,255,233}, {141,255,233}, {141,255,233}, {141,255,233}, {141,255,233}, {141,255,233}, {41,255,227}, {41,255,227}, {41,255,227}, {41,255,227}, {41,255,227}, {41,255,227}, {41,255,227}, {41,255,227}, {141,255,233}, {141,255,233}, {141,255,233}, {141,255,233}, {141,255,233}, {41,255,227}, {41,255,227}, {41,255,227}, {41,255,227}, {41,255,227}, {41,255,227}, {41,255,227}, {41,255,227}, {41,255,227}, {41,255,227}, {41,255,227}, {41,255,227}, {41,255,227}, {41,255,227}, {41,255,227}, {41,255,227}, {41,255,227}, {41,255,227}, {41,255,227}, {41,255,227}, {41,255,227}, {41,255,227}, {41,255,227} },
-
     [2] = { {86,176,152}, {141,255,233}, {141,255,233}, {141,255,233}, {141,255,233}, {141,255,233}, {141,255,233}, {141,255,233}, {141,255,233}, {141,255,233}, {141,255,233}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {141,255,233}, {141,255,233}, {141,255,233}, {141,255,233}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152} },
-
+    [3] = { {118,248,146}, {118,248,146}, {32,255,234}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {32,255,234}, {32,255,234}, {32,255,234}, {118,248,146}, {118,248,146}, {32,255,234}, {32,255,234}, {32,255,234}, {32,255,234}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146} },
     [4] = { {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255} },
-
-    [5] = { {118,248,146}, {118,248,146}, {32,255,234}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {32,255,234}, {32,255,234}, {32,255,234}, {118,248,146}, {118,248,146}, {32,255,234}, {32,255,234}, {32,255,234}, {32,255,234}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146} },
-
-    [6] = { {118,248,146}, {118,248,146}, {32,255,234}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {32,255,234}, {32,255,234}, {32,255,234}, {118,248,146}, {118,248,146}, {32,255,234}, {32,255,234}, {32,255,234}, {32,255,234}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146} },
-    [7] = { {118,248,146}, {118,248,146}, {32,255,234}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {32,255,234}, {32,255,234}, {32,255,234}, {118,248,146}, {118,248,146}, {32,255,234}, {32,255,234}, {32,255,234}, {32,255,234}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146} },
-    [8] = { {118,248,146}, {118,248,146}, {32,255,234}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {32,255,234}, {32,255,234}, {32,255,234}, {118,248,146}, {118,248,146}, {32,255,234}, {32,255,234}, {32,255,234}, {32,255,234}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146} },
-
-
 }; 
 
 void set_layer_color(int layer) {
@@ -221,6 +203,9 @@ void rgb_matrix_indicators_user(void) {
     case 2:
       set_layer_color(2);
       break;
+    case 3:
+      set_layer_color(3);
+      break;
     case 4:
       set_layer_color(4);
       break;
@@ -242,36 +227,6 @@ void rgb_matrix_indicators_user(void) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
-    case PLOVER:
-      if (record->event.pressed) {
-        #ifdef AUDIO_ENABLE
-          stop_all_notes();
-          PLAY_SONG(plover_song);
-        #endif
-        layer_off(_RAISE);
-        layer_off(_LOWER);
-        layer_off(_ADJUST);
-        layer_on(_PLOVER);
-        if (!eeconfig_is_enabled()) {
-            eeconfig_init();
-        }
-        keymap_config.raw = eeconfig_read_keymap();
-        keymap_config.nkro = 1;
-        eeconfig_update_keymap(keymap_config.raw);
-      }
-      return false;
-      break;
-    case EXT_PLV:
-      if (record->event.pressed) {
-        #ifdef AUDIO_ENABLE
-          PLAY_SONG(plover_gb_song);
-        #endif
-        layer_off(_PLOVER);
-      }
-      return false;
-      break;
-  }
   return true;
 }
 
@@ -282,67 +237,10 @@ uint8_t muse_offset = 70;
 uint16_t muse_tempo = 50;
 
 void encoder_update(bool clockwise) {
-  if (muse_mode) {
-    if (IS_LAYER_ON(_RAISE)) {
-      if (clockwise) {
-        muse_offset++;
-      } else {
-        muse_offset--;
-      }
-    } else {
-      if (clockwise) {
-        muse_tempo+=1;
-      } else {
-        muse_tempo-=1;
-      }
-    }
-  } else {
-    if (clockwise) {
-      #ifdef MOUSEKEY_ENABLE
-        tap_code(KC_MS_WH_DOWN);
-      #else
-        tap_code(KC_PGDN);
-      #endif
-    } else {
-      #ifdef MOUSEKEY_ENABLE
-        tap_code(KC_MS_WH_UP);
-      #else
-        tap_code(KC_PGUP);
-      #endif
-    }
   }
-}
 
 void dip_switch_update_user(uint8_t index, bool active) {
-    switch (index) {
-        case 0: {
-#ifdef AUDIO_ENABLE
-            static bool play_sound = false;
-#endif
-            if (active) {
-#ifdef AUDIO_ENABLE
-                if (play_sound) { PLAY_SONG(plover_song); }
-#endif
-                layer_on(_ADJUST);
-            } else {
-#ifdef AUDIO_ENABLE
-                if (play_sound) { PLAY_SONG(plover_gb_song); }
-#endif
-                layer_off(_ADJUST);
-            }
-#ifdef AUDIO_ENABLE
-            play_sound = true;
-#endif
-            break;
-        }
-        case 1:
-            if (active) {
-                muse_mode = true;
-            } else {
-                muse_mode = false;
-            }
-    }
-}
+  }
 
 void matrix_scan_user(void) {
 #ifdef AUDIO_ENABLE
