@@ -1,0 +1,2 @@
+#define QMK_VERSION "15-dirty"
+#define QMK_BUILDDATE "2019-12-31-18:38:44"
