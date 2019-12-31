@@ -28,6 +28,8 @@ enum planck_layers {
 };
 enum planck_keycodes {
   QWERTY = SAFE_RANGE,
+  CPP_BITS,
+  NAVY_SEAL,
   COLEMAK,
   PLOVER,
   BACKLIT,
@@ -72,7 +74,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB,  KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L,    KC_BSPC,
     KC_ESC,  KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S,    KC_SLSH,
     KC_LSFT, KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,    KC_ENT ,
-    DF(_QWERTY), DF(_QWERTY), KC_LALT, KC_LGUI, MO(_LOWER),   KC_SPC,  KC_SPC,  MO(_RAISE),   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
+    TG(_DVORAK), DF(_QWERTY), KC_LALT, KC_LGUI, MO(_LOWER),   KC_SPC,  KC_SPC,  MO(_RAISE),   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
 ),
 
 /* Lower
@@ -112,9 +114,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_NO, KC_NO, KC_NO, KC_NO, MO(_MACRO), KC_NO, KC_NO, KC_NO, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY
 ),
 [_MACRO] = LAYOUT_planck_grid(
-    KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
+    KC_TAB,  KC_Q,    NAVY_SEAL,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
     KC_ESC,  KC_MS_L,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
-    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT ,
+    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    CPP_BITS,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT ,
     BACKLIT, KC_LCTL, KC_LALT, KC_LGUI, KC_TRNS,   KC_SPC,  KC_SPC,  KC_TRNS,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
 ),
 /* Mouse layer 
@@ -132,7 +134,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_NO,KC_NO,KC_MS_U,KC_NO,KC_NO,KC_NO,KC_NO,KC_NO,KC_NO,KC_NO,DF(_DVORAK),KC_NO, 
     KC_NO,KC_MS_L,KC_MS_D,KC_MS_R,KC_A,KC_NO,KC_BTN1,KC_WH_D,KC_WH_U,KC_BTN2,KC_NO,KC_NO, 
     KC_NO,KC_NO,KC_NO,KC_NO,KC_NO,KC_NO,KC_NO,KC_NO,KC_NO,KC_NO,KC_NO,KC_NO, 
-    KC_NO,KC_NO,KC_NO,KC_NO,KC_NO,KC_NO,KC_NO,KC_NO,KC_NO,KC_NO,KC_NO,KC_NO
+    TG(_DVORAK),KC_NO,KC_NO,KC_NO,KC_NO,KC_NO,KC_NO,KC_NO,KC_NO,KC_NO,KC_NO,KC_NO
 ),
 
 /* Adjust (Lower + Raise)
@@ -172,7 +174,9 @@ const uint8_t PROGMEM ledmap[][DRIVER_LED_TOTAL][3] = {
     [2] = { {86,176,152}, {141,255,233}, {141,255,233}, {141,255,233}, {141,255,233}, {141,255,233}, {141,255,233}, {141,255,233}, {141,255,233}, {141,255,233}, {141,255,233}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {141,255,233}, {141,255,233}, {141,255,233}, {141,255,233}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152}, {86,176,152} },
     [3] = { {118,248,146}, {118,248,146}, {32,255,234}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {32,255,234}, {32,255,234}, {32,255,234}, {118,248,146}, {118,248,146}, {32,255,234}, {32,255,234}, {32,255,234}, {32,255,234}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146}, {118,248,146} },
     [4] = { {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255}, {0,255,255} },
+    [5] = { {23,255,255}, {23,255,255}, {23,255,255}, {23,255,255}, {23,255,255}, {23,255,255}, {23,255,255}, {23,255,255}, {23,255,255}, {23,255,255}, {23,255,255}, {23,255,255}, {23,255,255}, {23,255,255}, {23,255,255}, {23,255,255}, {23,255,255}, {23,255,255}, {23,255,255}, {23,255,255}, {23,255,255}, {23,255,255}, {23,255,255}, {23,255,255}, {23,255,255}, {23,255,255}, {23,255,255}, {23,255,255}, {23,255,255}, {23,255,255}, {23,255,255}, {23,255,255}, {23,255,255}, {23,255,255}, {23,255,255}, {23,255,255}, {23,255,255}, {23,255,255}, {23,255,255}, {23,255,255}, {23,255,255}, {23,255,255}, {23,255,255}, {23,255,255}, {23,255,255}, {23,255,255}, {23,255,255} },
 }; 
+
 
 void set_layer_color(int layer) {
   for (int i = 0; i < DRIVER_LED_TOTAL; i++) {
@@ -227,6 +231,21 @@ void rgb_matrix_indicators_user(void) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case CPP_BITS:
+    if (record->event.pressed) {
+      clear_keyboard();
+      SEND_STRING("#include <bits/stdc++.h>");
+    }
+    return false;
+    break;
+    case NAVY_SEAL:
+    if (record->event.pressed) {
+      SEND_STRING("What the fuck did you just fucking say about me, you little bitch? I'll have you know I graduated top of my class in the Navy Seals, and I've been involved in numerous secret raids on Al-Quaeda, and I have over 300 confirmed kills. I am trained in gorilla warfare and I'm the top sniper in the entire US armed forces. You are nothing to me but just another target. I will wipe you the fuck out with precision the likes of which has never been seen before on this Earth, mark my fucking words. You think you can get away with saying that shit to me over the Internet? Think again, fucker. As we speak I am contacting my secret network of spies across the USA and your IP is being traced right now so you better prepare for the storm, maggot. The storm that wipes out the pathetic little thing you call your life. You're fucking dead, kid. I can be anywhere, anytime, and I can kill you in over seven hundred ways, and that's just with my bare hands. Not only am I extensively trained in unarmed combat, but I have access to the entire arsenal of the United States Marine Corps and I will use it to its full extent to wipe your miserable ass off the face of the continent, you little shit. If only you could have known what unholy retribution your little \"clever\" comment was about to bring down upon you, maybe you would have held your fucking tongue. But you couldn't, you didn't, and now you're paying the price, you goddamn idiot. I will shit fury all over you and you will drown in it. You're fucking dead, kiddo.");
+    }
+    return false;
+    break;
+  }
   return true;
 }
 
